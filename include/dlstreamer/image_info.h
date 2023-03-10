@@ -159,9 +159,13 @@ struct ImageInfo {
         return _layout;
     }
     size_t width() const {
+        if ( _layout.w_position() < 0 )
+            return 10; 
         return _info.shape.at(_layout.w_position());
     }
     size_t height() const {
+        if ( _layout.h_position() < 0 )
+            return 10;
         return _info.shape.at(_layout.h_position());
     }
     size_t channels() const {
