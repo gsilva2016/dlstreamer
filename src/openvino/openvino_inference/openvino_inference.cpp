@@ -70,11 +70,14 @@ class OpenVinoTensorInference : public BaseTransform {
         _model = _core.read_model(path);
         // set batch size
         int batch_size = _params->get<int>(param::batch_size);
-        if (batch_size > 1)
-            ov::set_batch(_model, batch_size);
+
         // get input info
         _model_input_info = FrameInfo(MediaType::Tensors);
         for (auto node : _model->get_parameters()) {
+            // Bit model fails because it was built with shape: ?,WHC but below code is not able to handle it.
+            node->set_layout("N...");
+            if (batch_size > 0)
+                ov::set_batch(_model, batch_size);
             auto dtype = data_type_from_openvino(node->get_element_type());
             auto shape = node->is_dynamic() ? node->get_input_partial_shape(0).get_min_shape() : node->get_shape();
             _model_input_info.tensors.push_back(TensorInfo(shape, dtype));
