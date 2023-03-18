@@ -62,7 +62,7 @@ class BlobToMetaConverter {
         if (labels.empty())
             return empty_label;
         if (label_id >= labels.size())
-            throw std::runtime_error("Label id is out of range");
+            return empty_label;
         return labels.at(label_id);
     }
 
