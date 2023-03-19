@@ -15,6 +15,8 @@ static inline int data_type_to_opencv(DataType type) {
     switch (type) {
     case DataType::UInt8:
         return CV_8U;
+    case DataType::Float16:
+	return CV_16F;
     case DataType::Int32:
         return CV_32S;
     case DataType::Int64:

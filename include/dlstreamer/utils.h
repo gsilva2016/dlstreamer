@@ -153,6 +153,8 @@ static inline std::string datatype_to_string(DataType datatype) {
     switch (datatype) {
     case DataType::UInt8:
         return "uint8";
+    case DataType::Float16:
+	return "float16";
     case DataType::Float32:
         return "float32";
     case DataType::Int32:
@@ -169,6 +171,8 @@ static inline DataType datatype_from_string(const std::string &str) {
         return DataType::UInt8;
     else if (str == "float32")
         return DataType::Float32;
+    else if (str == "float16")
+        return DataType::Float16;
     else if (str == "int32")
         return DataType::Int32;
     else if (str == "int64")

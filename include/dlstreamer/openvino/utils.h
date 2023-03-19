@@ -15,6 +15,8 @@ static inline DataType data_type_from_openvino(ov::element::Type element) {
     switch (element) {
     case ov::element::Type_t::u8:
         return DataType::UInt8;
+     case ov::element::Type_t::f16:
+	return DataType::Float16;
     case ov::element::Type_t::f32:
         return DataType::Float32;
     case ov::element::Type_t::i32:
@@ -31,6 +33,8 @@ static inline ov::element::Type data_type_to_openvino(DataType type) {
     switch (type) {
     case DataType::UInt8:
         return ov::element::Type_t::u8;
+    case DataType::Float16:
+	return ov::element::Type_t::f16;
     case DataType::Float32:
         return ov::element::Type_t::f32;
     case DataType::Int32:

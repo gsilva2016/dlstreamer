@@ -74,6 +74,7 @@ class InferenceResultMetadata : public DictionaryProxy {
         GVA_PRECISION_U8 = 40,
         GVA_PRECISION_I32 = 70,
         GVA_PRECISION_I64 = 72,
+	GVA_PRECISION_FP16 = 78,
         GVA_PRECISION_UNSPECIFIED = 255,
     } GVAPrecision;
     typedef enum {
@@ -85,6 +86,8 @@ class InferenceResultMetadata : public DictionaryProxy {
         switch (dtype) {
         case DataType::UInt8:
             return GVA_PRECISION_U8;
+	case DataType::Float16:
+	    return GVA_PRECISION_FP16;
         case DataType::Float32:
             return GVA_PRECISION_FP32;
         case DataType::Int32:
@@ -98,6 +101,8 @@ class InferenceResultMetadata : public DictionaryProxy {
         switch (precision) {
         case GVA_PRECISION_U8:
             return DataType::UInt8;
+	case GVA_PRECISION_FP16:
+	    return DataType::Float16;
         case GVA_PRECISION_FP32:
             return DataType::Float32;
         case GVA_PRECISION_I32:

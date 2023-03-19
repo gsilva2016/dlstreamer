@@ -14,7 +14,7 @@
 
 namespace dlstreamer {
 
-enum class DataType { UInt8 = 1, Int32 = 2, Int64 = 3, Float32 = 4 };
+enum class DataType { UInt8 = 1, Int32 = 2, Int64 = 3, Float32 = 4, Float16 = 5 };
 
 static inline size_t datatype_size(DataType datatype);
 static inline std::vector<size_t> contiguous_stride(const std::vector<size_t> &shape, DataType type);
@@ -94,6 +94,8 @@ static size_t datatype_size(DataType datatype) {
     switch (datatype) {
     case DataType::UInt8:
         return 1;
+    case DataType::Float16:
+	return 2;
     case DataType::Float32:
         return 4;
     case DataType::Int32:
@@ -132,7 +134,8 @@ inline bool check_datatype<int64_t>(DataType dtype) {
 }
 template <>
 inline bool check_datatype<float>(DataType dtype) {
-    return (dtype == DataType::Float32);
+    return (dtype == DataType::Float32 || dtype == DataType::Floa
+t16);
 }
 
 } // namespace dlstreamer
