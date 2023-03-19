@@ -134,8 +134,7 @@ inline bool check_datatype<int64_t>(DataType dtype) {
 }
 template <>
 inline bool check_datatype<float>(DataType dtype) {
-    return (dtype == DataType::Float32 || dtype == DataType::Floa
-t16);
+    return (dtype == DataType::Float32 || dtype == DataType::Float16);
 }
 
 } // namespace dlstreamer
